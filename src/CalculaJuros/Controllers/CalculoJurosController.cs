@@ -1,26 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Globalization;
+﻿using Microsoft.AspNetCore.Mvc;
 using CalculadorJuros.Services;
 
 namespace CalculadorJuros.Controllers
 {
+    /// <summary>
+    /// API Rest .Net Core para cálculo de juros compostos
+    /// </summary>
     [Produces("application/json")]
     [Route("api/")]
     public class CalculoJurosController : Controller
     {
-        // GET: api/Teste/5
+        /// <summary>
+        /// Recebe valorinicial e meses como parâmetros para cálculo de juros compostos com base em taxa de 0.01
+        /// </summary>
+        /// <param name="valorinicial"></param>
+        /// <param name="meses"></param>
+        /// <returns></returns>
         [HttpGet("calculajuros")]
         public string GetCalculaJuros(decimal valorinicial,int meses)
         {
-            return JurosService.CalculaJuros(valorinicial,meses).ToString("C", CultureInfo.CurrentCulture);
+            return JurosService.CalculaJuros(valorinicial,meses).ToString();
         }
 
-        //ShowMeTheCode
+        /// <summary>
+        /// Informações sobre repositório
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("showmethecode")]
         public string ShowMeTheCode()
         {
