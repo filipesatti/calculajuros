@@ -4,25 +4,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
+using CalculadorJuros.Services;
 
-namespace CalculaJuros.Controllers
+namespace CalculadorJuros.Controllers
 {
     [Produces("application/json")]
     [Route("api/")]
-    public class TesteController : Controller
+    public class CalculoJurosController : Controller
     {
         // GET: api/Teste/5
         [HttpGet("calculajuros")]
-        public string GetCalculaJuros(double valorinicial,int meses)
+        public string GetCalculaJuros(decimal valorinicial,int meses)
         {
-            return Math.Pow(valorinicial*(1.01), meses).ToString();
+            return JurosService.CalculaJuros(valorinicial,meses).ToString("C", CultureInfo.CurrentCulture);
         }
 
         //ShowMeTheCode
         [HttpGet("showmethecode")]
         public string ShowMeTheCode()
         {
-            return "value";
+            return @"https://github.com/filipesatti/calculajuros.git";
         }
     }
 }
